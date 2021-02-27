@@ -1,0 +1,56 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.slider {
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(to left, #1F394A, #A80E0E);
+    z-index: -1;
+}
+
+nav {
+    display: grid;
+    grid-template-columns: 10% 1fr 1fr 10%;
+    min-height: 10vh;
+    color: white;
+    align-items: center;
+}
+
+#logo {
+    grid-column: 2/3;
+    font-size: 40px;
+}
+
+#inst {
+   width: 7em;
+   height: 2em;
+   justify-self: end;
+   font-size: 18px;
+   cursor: pointer;
+}
+
+section {
+    display: flex;
+    height: 80vh;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.hero {
+    height: 90%;
+    width: 100%;
+}
+
+.hero img {
+  width: 100%;
+  height: 100%;
+   
+}
+
