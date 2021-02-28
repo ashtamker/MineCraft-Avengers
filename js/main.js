@@ -1,34 +1,17 @@
-const hero = document.querySelector('.hero');
-const slider = document.querySelector('.slider');
-const logo = document.querySelector('#logo');
-const inst = document.querySelector('#inst');
-
-const tl = new TimelineMax();
-tl.fromTo(hero,1, {height: "0%"}, {height: "90%", ease: Power2.easeInOut})
-.fromTo(hero, 1.2, {width: "100%"}, {width: "90%",ease: Power2.easeInOut})
-
-// .formTo(slider, 1.2, {x: "-200%"}, {x: "0%", ease: Power2.easeInOut}, "-=1.2")
-// .formTo(logo, 0.5, {opacity: 0, x:30}, {opacity: 1, x:0}, "-=0.5")
-// .formTo(inst, 0.5, {opacity: 0, x:30}, {opacity: 1, x:0}, "-=0.5");
-
 
 const gameMap = document.querySelector('.game-board-map');
-const lastMindedTileElement = document.querySelector('.tools-sidebar__lastMindedTile');
+const lastTileBlock = document.querySelector('.tools-sidebar-lastTile');
 const tools = document.querySelectorAll('.tool');
 const menu = document.querySelector('.menu');
-const startBtn = document.querySelector('.menu__btn');
-
+const startBtn = document.querySelector('.map-btn');
 
 const state = {
     gameStart: false,
     worldMatrix: [],
-    selectedTool: 8, 
-    lastMindedTile: 8, 
+    selectedTool: -1, 
+    lastTile: -1, 
 }
 
-const startGame = () => {
-    menu.style.display = 'none';
-}
 const createWorld = (mat, tileOnClickHandler) => {
     for (let i = 0; i < mat.length; i++) {
         const line = document.createElement('div');
@@ -62,7 +45,7 @@ const createMatrix = (row, col) => {
         mat.push(board);
     }
 
-    const dirtLevel = row - parseInt((Math.floor((Math.random() * 4) ) * .1) * row);
+    const groundFloor = row - parseInt((Math.floor((Math.random() * 4) ) * .1) * row);
     
     for (let i = row - 1; i >= 0; i--) {
       
@@ -70,12 +53,12 @@ const createMatrix = (row, col) => {
             const tile = {};
             tile.col = j;
             tile.row = i;
-            if (i >= dirtLevel) {
+            if (i >= groundFloor) {
                 tile.type = 0;
-            } else if (i === dirtLevel - 1) {
+            } else if (i === groundFloor - 1) {
                 tile.type = 1;
 
-            } else if (i === dirtLevel - 2) {
+            } else if (i === groundFloor - 2) {
                 if (j >= col - 2) {
                     mat[i][j] = {
                         type: -1,
@@ -94,7 +77,7 @@ const createMatrix = (row, col) => {
                     };
 
                 } else {
-                    const rand = getRandom9();
+                    const rand = getRandom();
                     mat[i - 2][j] = {
                         type: rand[0],
                         col: j ,
@@ -145,18 +128,15 @@ const createMatrix = (row, col) => {
 
                 continue;
 
-
             } else {
                 tile.type = -1;
             }
 
             mat[i][j] = tile;
-
         }
 
-        if (i === dirtLevel - 2) {
+        if (i === groundFloor - 2) {
             i -= 2;
-
         };
 
     }
@@ -164,46 +144,46 @@ const createMatrix = (row, col) => {
     return mat;
 }
 
-//return mat of 3*3 of environment options
-getRandom9 = () => {
+
+getRandom = () => {
     const kind = Math.floor((Math.random() * 6));
 
     switch (kind) {
         case 0:
-            return [2, 2, 2, 2, 2, 2, -1, 3, -1]; //tree
+            return [2, 2, 2, 2, 2, 2, -1, 3, -1];
         case 1:
-            return [-1, -1, -1, -1, -1, -1, 4, 4, -1]; //empty
+            return [-1, -1, -1, -1, -1, -1, 4, 4, -1]; 
         case 2:
-            return [-1, -1, -1, -1, 2, -1, 2, 2, 2]; //empty
+            return [-1, -1, -1, -1, 2, -1, 2, 2, 2]; 
 
         case 3:
-            return [-1, 2, -1, -1, 3, 4, -1, 3, 4]; //tree
+            return [-1, 2, -1, -1, 3, 4, -1, 3, 4]; 
         case 4:
-            return [-1, -1, -1, 4, 4, 4, 4, 4, 4]; //tree
+            return [-1, -1, -1, 4, 4, 4, 4, 4, 4]; 
 
         default:
-            return [-1, -1, -1, -1, -1, -1, -1, -1, -1]; //empty
+            return [-1, -1, -1, -1, -1, -1, -1, -1, -1]; 
 
     }
 
 }
 
-const updateLastMindedTIle = (type) => {
-    state.lastMindedTile = type;
-    lastMindedTileElement.dataset.type = type;
+const updateLastTIle = (type) => {
+    state.lastTile = type;
+    lastTileBlock.dataset.type = type;
 }
-//validate tool can mine element
+
 const validTool = (type, selectedTool) => {
     switch (selectedTool) {
-        case 0: //p0-pickaxe => rock(4)i
+        case 0: 
             if (type == 4) 
             return true;
             break;
-        case 1: // 1-shovel => dirt,dirt-grass(0,1)
+        case 1: 
             if (type == 0 || type == 1) 
             return true;
             break;
-        case 2: // 2-axe => leaves,wood(2,3) 
+        case 2:
             if (type == 2 || type == 3) 
             return true;
             break;
@@ -216,7 +196,7 @@ const validTool = (type, selectedTool) => {
     return false;
 };
 
-//adds warning after invalid tool press;
+
 const toolwarning = () => {
     tools.forEach(t => {
         t.classList.add('warning');
@@ -230,28 +210,27 @@ const removeAllWarning = () => {
     })
 }
 
-//resets all active tools
+
 const resetSelectedTools = () => {
     tools.forEach(t => {
         t.classList.remove('active');
     })
 }
 
-//events
+
 const onStartGameClickHandler = (e) => {
     menu.style.display = 'none';
     gameMap.style.display = "block";
-
     state.worldMatrix = createMatrix(12, 18);
     createWorld(state.worldMatrix, tileOnClickHandler);
 }
 
 const resetGame = (e) => {
     menu.style.display = 'none';
-    state.lastMindedTile = -1;
+    state.lastTile = -1;
     state.selectedTool = -1;
     resetSelectedTools();
-    lastMindedTileElement.dataset.type = -1;
+    lastTileBlock.dataset.type = -1;
     state.worldMatrix = createMatrix(12, 18);
     gameMap.innerHTML ="";
     createWorld(state.worldMatrix, tileOnClickHandler);
@@ -274,14 +253,14 @@ const tileOnClickHandler = (e) => {
     const tile = e.currentTarget;
     let type = parseInt(tile.dataset.type);
 
-    //check inputs 
+    
     if (isNaN(type)) {
         console.error('invalid type');
         return;
     }
 
 
-    if (type >= 0) { //mine tile
+    if (type >= 0) { 
 
         if (!validTool(type, state.selectedTool)) {
             console.error('invalid tool');
@@ -296,13 +275,13 @@ const tileOnClickHandler = (e) => {
         }
         tileStateObject.type = -1;
         tile.dataset.type = -1;
-        updateLastMindedTIle(type);
+        updateLastTile(type);
 
-    } else if (type == -1) { // plant tile
-        if (state.lastMindedTile >= 0) {
-            tile.dataset.type = state.lastMindedTile;
-            state.lastMindedTile = -1;
-            lastMindedTileElement.dataset.type = -1;
+    } else if (type == -1) { 
+        if (state.lastTile >= 0) {
+            tile.dataset.type = state.lastTile;
+            state.lastTile = -1;
+            lastTileBlock.dataset.type = -1;
         }
     }
 
@@ -314,8 +293,16 @@ const addEventsToTools = (toolOnClickHandler) => {
     })
 }
 
-//main
+const homeBtn = document.querySelector('.home-btn');
+
+homeBtn.addEventListener('click', () =>{
+    window.location.replace("../home.html") 
+})
+
+
 gameMap.style.display = "none";
 addEventsToTools(toolOnClickHandler);
 startBtn.addEventListener('click', onStartGameClickHandler);
 document.querySelector('.reset').addEventListener('click',resetGame);
+
+

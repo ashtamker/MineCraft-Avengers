@@ -1,0 +1,233 @@
+*, *::after, *::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'mincraft';
+    src: url('../Minecraft.ttf');
+    font-weight: bold;
+}
+
+
+.wrapper {
+    width: 100vw;
+    background: #f6f6f6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+
+/* tools */
+
+.row {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.home-btn {
+    position: absolute;
+    top: 45px;
+    left: 5px;
+    background: linear-gradient(to bottom,#30607E, #111);
+    color: white;
+    border-radius: 5px;
+    font-weight: 400;
+    font-size: 15px;
+    padding: 5px 10px;
+    font-family: 'mincraft';
+} 
+
+
+
+ .reset {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background: linear-gradient(to bottom,#30607E, #111);
+    color: white;
+    border-radius: 5px;
+    font-weight: 400;
+    font-size: 15px;
+    padding: 5px 10px;
+    font-family: 'mincraft';
+} 
+
+
+
+ .map-btn {
+    position: absolute;
+    top: 85px;
+    left: 5px;
+    background: linear-gradient(to bottom,#30607E, #111);
+    color: white;
+    font-family: 'mincraft';
+    font-size: 15px;
+    font-weight: 400;
+    box-shadow: 1px 2px 3px white;
+    padding: 5px 10px;
+    transition: all 0.3s ease-in-out;
+
+} 
+
+
+
+.game-board {
+    width: 80vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-board-map {
+    background: transparent;
+    width: 80%;
+    justify-content: center;
+}
+
+
+
+
+.tile {
+    /* flex: 1; */
+    height: 8vh;
+    width: 8vh;
+    transition: background 0.8s ease-in-out;
+    /* height: 50px; */
+    background: #CCEBFF;
+    /* background: rgb(163,214,255) no-repeat center center/cover;
+    background: linear-gradient(350deg, rgba(163,214,255,1) 71%, rgba(248,253,45,1) 92%); */
+}
+
+.tile:hover {
+    border: 1px solid #333;
+}
+
+.tile[data-type="-1"] {
+    background: #CCEBFF;
+    /* background: rgb(163,214,255) no-repeat;
+background: linear-gradient(350deg, rgba(163,214,255,1) 71%, rgba(248,253,45,1) 92%); */
+}
+
+.tile[data-type="0"] {
+    background: url('../img/full-land.png') no-repeat center center/cover;
+}
+
+.tile[data-type="1"] {
+    background: url('../img/land.png') no-repeat center center/cover;
+}
+
+.tile[data-type="2"] {
+    background: url('../img/tree-top.jpeg') no-repeat center center/cover;
+}
+
+.tile[data-type="3"] {
+    background: url('../img/tree-base.png') no-repeat center center/cover;
+}
+
+.tile[data-type="4"] {
+    background: url('../img/rock.png') no-repeat center center/cover;
+}
+
+
+/* tools-sidebar */
+
+.tools-sidebar {
+    background: #30607E;
+    width: 15vw;
+    height: 90vh;
+    margin-top: 20px;
+    padding: 50px 10px;
+    color: white;
+    
+}
+
+.tool {
+    padding: 8px;
+    padding-bottom: 2px;
+    text-align: center;
+    width: 50%;
+    font-size: 0.85em;
+    border: 2px solid white;
+    transition: background 0.5s ease-in-out;
+}
+
+.tool:hover {
+    background: #FF8A1C;
+    cursor: pointer;
+}
+
+.tool.active {
+    background: #FF8A1C;
+    
+}
+
+.tool.active.warning {
+    background: red;
+    
+}
+
+.tool .img {
+    height: 6em;
+    width: 3em;
+    margin: 0 auto;
+    background-size: contain;
+
+}
+
+.tool[data-tool="1"] > .img {
+    background: url('../img/tools-shovel.png') no-repeat center center/contain;
+}
+
+.tool[data-tool="0"] > .img {
+    background: url('../img/tools-shiled.png') no-repeat center center/contain;
+}
+
+.tool[data-tool="2"] > .img {
+    background: url('../img/tools-axe.png') no-repeat center center/contain;
+}
+
+.tools-sidebar-tool {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    justify-items: center;
+    height: 100%;
+
+   
+
+
+}
+
+.tools-sidebar-lastTile {
+    width: 8vh;
+    height: 8vh;
+    border: 2px solid white;
+}
+
+.tools-sidebar-lastTile[data-type="-1"] {
+    background: transparent;
+}
+
+.tools-sidebar-lastTile[data-type="0"] {
+    background: url('../img/land.png') no-repeat center center/cover;
+}
+
+.tools-sidebar-lastTile[data-type="1"] {
+    background: url('../img/full-land.png') no-repeat center center/cover;
+}
+
+.tools-sidebar-lastTile[data-type="2"] {
+    background: url('../img/tree-top.jpeg') no-repeat center center/cover;
+}
+
+.tools-sidebar-lastTile[data-type="3"] {
+    background: url('../img/tree-base.png') no-repeat center center/cover;
+}
+
+.tools-sidebar-lastTile[data-type="4"] {
+    background: url('../img/rock.png') no-repeat center center/cover;
+}
+

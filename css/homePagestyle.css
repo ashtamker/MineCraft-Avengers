@@ -1,7 +1,14 @@
+@font-face {
+    font-family: 'mincraft';
+    src: url('../Minecraft.ttf');
+    font-weight: bold;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'mincraft';
 }
 
 .slider {
@@ -27,7 +34,7 @@ nav {
     font-size: 40px;
 }
 
-#inst {
+.inst {
    width: 7em;
    height: 2em;
    justify-self: end;
