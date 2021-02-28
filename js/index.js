@@ -14,6 +14,6 @@ tl.fromTo(hero,1, {height: "0%"}, {height: "90%", ease: Power2.easeInOut})
 const gameBtn = document.querySelector('.menu-btn');
 
 gameBtn.addEventListener('click', () =>{
-    window.location.replace("../index.html") 
+    window.location.replace("../game.html") 
 })
 

@@ -296,7 +296,7 @@ const addEventsToTools = (toolOnClickHandler) => {
 const homeBtn = document.querySelector('.home-btn');
 
 homeBtn.addEventListener('click', () =>{
-    window.location.replace("../home.html") 
+    window.location.replace("../index.html") 
 })
 
 
