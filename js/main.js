@@ -146,7 +146,7 @@ const createMatrix = (row, col) => {
 
 
 getRandom = () => {
-    const kind = Math.floor((Math.random() * 6));
+    const kind = Math.floor((Math.random() * 5));
 
     switch (kind) {
         case 0:
@@ -219,14 +219,12 @@ const resetSelectedTools = () => {
 
 
 const onStartGameClickHandler = (e) => {
-    menu.style.display = 'none';
     gameMap.style.display = "block";
     state.worldMatrix = createMatrix(12, 18);
     createWorld(state.worldMatrix, tileOnClickHandler);
 }
 
 const resetGame = (e) => {
-    menu.style.display = 'none';
     state.lastTile = -1;
     state.selectedTool = -1;
     resetSelectedTools();

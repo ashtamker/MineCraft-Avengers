@@ -65,7 +65,7 @@
     font-family: 'mincraft';
     font-size: 15px;
     font-weight: 400;
-    box-shadow: 1px 2px 3px white;
+    box-shadow: 1px 2px 3px #333;
     padding: 5px 10px;
     transition: all 0.3s ease-in-out;
 
@@ -149,7 +149,7 @@ background: linear-gradient(350deg, rgba(163,214,255,1) 71%, rgba(248,253,45,1) 
     text-align: center;
     width: 50%;
     font-size: 0.85em;
-    border: 2px solid white;
+    border: 2px solid #111;
     transition: background 0.5s ease-in-out;
 }
 
@@ -204,7 +204,7 @@ background: linear-gradient(350deg, rgba(163,214,255,1) 71%, rgba(248,253,45,1) 
 .tools-sidebar-lastTile {
     width: 8vh;
     height: 8vh;
-    border: 2px solid white;
+    border: 2px solid #111;
 }
 
 .tools-sidebar-lastTile[data-type="-1"] {
