@@ -168,7 +168,7 @@ getRandom = () => {
 
 }
 
-const updateLastTIle = (type) => {
+const updateLastTile = (type) => {
     state.lastTile = type;
     lastTileBlock.dataset.type = type;
 }
