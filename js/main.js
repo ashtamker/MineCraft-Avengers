@@ -46,8 +46,7 @@ const createMatrix = (row, col) => {
 
     const groundFloor = row - parseInt((Math.floor((Math.random() * 4) ) * .1) * row);
     
-    for (let i = row - 1; i >= 0; i--) {
-      
+    for (let i = (row - 1); i >= 0; i--) {
         for (let j = 0; j < col; j++) {
             const tile = {};
             tile.col = j;
