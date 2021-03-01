@@ -28,7 +28,6 @@ const createWorld = (mat, tileOnClickHandler) => {
             tile.addEventListener('click', tileOnClickHandler);
             line.appendChild(tile);
         }
-
         gameMap.appendChild(line);
     }
 }
@@ -140,15 +139,13 @@ const createMatrix = (row, col) => {
         };
 
     }
-    console.log(mat);
     return mat;
 }
 
-
 getRandom = () => {
-    const kind = Math.floor((Math.random() * 5));
+    const arae = Math.floor((Math.random() * 5));
 
-    switch (kind) {
+    switch (arae) {
         case 0:
             return [2, 2, 2, 2, 2, 2, -1, 3, -1];
         case 1:
@@ -188,14 +185,11 @@ const validTool = (type, selectedTool) => {
             return true;
             break;
         default:
-            console.error("invalid tool number");
             break;
 
     }
-
     return false;
 };
-
 
 const toolwarning = () => {
     tools.forEach(t => {
@@ -210,7 +204,6 @@ const removeAllWarning = () => {
     })
 }
 
-
 const resetSelectedTools = () => {
     tools.forEach(t => {
         t.classList.remove('active');
@@ -224,7 +217,7 @@ const onStartGameClickHandler = (e) => {
     createWorld(state.worldMatrix, tileOnClickHandler);
 }
 
-const resetGame = (e) => {
+const restartGame = (e) => {
     state.lastTile = -1;
     state.selectedTool = -1;
     resetSelectedTools();
@@ -264,7 +257,6 @@ const tileOnClickHandler = (e) => {
             console.error('invalid tool');
             toolwarning();
             return;
-
         }
 
         tileStateObject = state.worldMatrix[tile.dataset.row][tile.dataset.col];
@@ -274,8 +266,8 @@ const tileOnClickHandler = (e) => {
         tileStateObject.type = -1;
         tile.dataset.type = -1;
         updateLastTile(type);
-
-    } else if (type == -1) { 
+      } 
+    else if (type == -1) { 
         if (state.lastTile >= 0) {
             tile.dataset.type = state.lastTile;
             state.lastTile = -1;
@@ -297,10 +289,9 @@ homeBtn.addEventListener('click', () =>{
     window.location.replace("../index.html") 
 })
 
-
 gameMap.style.display = "none";
 addEventsToTools(toolOnClickHandler);
 startBtn.addEventListener('click', onStartGameClickHandler);
-document.querySelector('.reset').addEventListener('click',resetGame);
+document.querySelector('.reset').addEventListener('click',restartGame);
 
 
